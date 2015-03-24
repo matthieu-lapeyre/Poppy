@@ -119,7 +119,7 @@ def main():
   #from pypot.vrep import from_vrep
   #from pypot.vrep import close_all_connections
   
-  poppy_config_file = '/home/odroid/Poppy/Dev/Config/poppy_config.json'
+  poppy_config_file = '../Config/poppy_config.json'
   
   with open(poppy_config_file) as f:
      poppy_config = json.load(f)
