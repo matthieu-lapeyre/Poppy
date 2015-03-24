@@ -1,13 +1,18 @@
+
 poppy_config={}
+
 poppy_config['controllers'] = {}
+
 poppy_config['controllers']['upper_body_controller'] = {
     "port": "TODO: Set the good port name",
     "sync_read": True,
     "attached_motors": ["head"],
 }
+
 poppy_config['motorgroups'] = {
     "head": ["head_z", "head_y"],
 }
+
 poppy_config['motors'] = {
     "head_y": {
       "id": 37,
@@ -19,11 +24,11 @@ poppy_config['motors'] = {
     "head_z": {
       "id": 36,
       "type": "AX-18",
-      "orientation": "direct",
+      "orientation": "indirect",
       "offset": 0.0,
       "angle_limit": [-100, 100 ],
     },
- }
+}
 
 if __name__ == '__main__':
     '''
@@ -37,8 +42,7 @@ if __name__ == '__main__':
 
     '''
     import json
-    poppy_config['controllers']['upper_body_controller']['port'] = "/dev/tty/usbmodem4121"
+    poppy_config['controllers']['upper_body_controller']['port'] = "/dev/ttyUSB0"
 
-    with open('poppy_head_config.json','w') as f:
-        json.dump(poppy_head_config, f, indent=2)
-
+    with open('poppy_config.json','w') as f:
+        json.dump(poppy_config, f, indent=2)

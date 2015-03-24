@@ -25,7 +25,7 @@ void loop()
 	  // wait Go for send data
       int inByte = Serial.read();
 
-	  volts_mik = Sampling_Miks(); 	  // Mik Sensors
+      Sampling_Miks(volts_mik); 	  // Mik Sensors
 	    
     // Send Sensor's data to serial  
     Serial.print(volts_mik[0]);
@@ -36,7 +36,7 @@ void loop()
 }
 
 
-double Sampling_Miks()
+void Sampling_Miks(double *volts)
 {
    unsigned long startMillis= millis();  // Start of sample window
    
@@ -47,9 +47,8 @@ double Sampling_Miks()
    unsigned int signalMin_mik1 = 1024;
    
    unsigned int signalMax_mik2 = 0;
-   unsigned int signalMin_mik2 = 1024;
-   
-   double volts[2];
+   unsigned int signalMin_mik2 = 1024; 
+
    
    while (millis() - startMillis < sampleWindow)
     {
@@ -83,12 +82,12 @@ double Sampling_Miks()
      }
 
     peakToPeak_mik1 = signalMax_mik1 - signalMin_mik1;  // max - min = peak-peak amplitude
-    volts[0] = (peakToPeak_mik1 * 3.3) / 1024;  // convert to volts 
-
+    //volts[0] = (peakToPeak_mik1 * 3.3) / 1024;  // convert to volts 
+    volts[0] = peakToPeak_mik1;
+      
     peakToPeak_mik2 = signalMax_mik2 - signalMin_mik2;  // max - min = peak-peak amplitude
-    volts[1] = (peakToPeak_mik2 * 3.3) / 1024;  // convert to volts 
-	
-    return volts;
+    //volts[1] = (peakToPeak_mik2 * 3.3) / 1024;  // convert to volts 
+    volts[1] = peakToPeak_mik2;
 }
 
 void establishContact() 
